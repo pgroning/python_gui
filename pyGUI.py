@@ -41,6 +41,8 @@ class mainGUI(QtGui.QMainWindow):
         # Set window size and position
         #self.setGeometry(300, 300, 800, 600)
         self.resize(800,600)
+        self.setMinimumWidth(700)
+        self.setMinimumHeight(500)
         #self.center()
         qr = self.frameGeometry()
         cp = QtGui.QDesktopWidget().availableGeometry().center()
@@ -51,7 +53,7 @@ class mainGUI(QtGui.QMainWindow):
         self.setWindowTitle("pyBird")
 
         # Set window icon
-        #self.setWindowIcon(QtGui.QIcon('web.png'))
+        self.setWindowIcon(QtGui.QIcon('bird-icon_32x32.png'))
 
         # Create status bar
         self.statusBar().showMessage('Ready')
@@ -62,7 +64,7 @@ class mainGUI(QtGui.QMainWindow):
         fileMenu = menuBar.addMenu('&File')
 
         # Create file choice action
-        ofileAction = QAction(QIcon('exit.png'), 'Open file...', self)
+        ofileAction = QAction(QIcon('doc-icon_32x32.png'), 'Open file...', self)
         ofileAction.setStatusTip('Open file...')
         ofileAction.triggered.connect(self.chooseFile)
 
@@ -70,7 +72,7 @@ class mainGUI(QtGui.QMainWindow):
         fileMenu.addAction(ofileAction)
 
         # Create exit action
-        exitAction = QAction(QIcon('exit.png'), 'Exit', self)
+        exitAction = QAction(QIcon('exit-icon_32x32.png'), 'Exit', self)
         exitAction.setShortcut('Ctrl+Q')
         exitAction.setStatusTip('Exit application')
         exitAction.triggered.connect(QtGui.qApp.quit)
@@ -90,19 +92,18 @@ class mainGUI(QtGui.QMainWindow):
         #self.centralWidget = QtGui.QWidget()
         #self.setCentralWidget(self.centralWidget)
 
-        cw.btn = QtGui.QPushButton('Quit!', cw)
+        #cw.btn = QtGui.QPushButton('Quit!', cw)
         #self.centralWidget.btn = QtGui.QPushButton('Quit!', self.centralWidget)
 
         grid = QtGui.QGridLayout()
+        grid.setSpacing(50)
         cw.setLayout(grid)
 
-        grid.addWidget(cw.btn, )
-
-
-        #w = QGridLayout()
-
-
-
+        for i in range(6):
+            cw.btn = QtGui.QPushButton('Quit!', cw)
+            #title = QtGui.QLabel('Title')
+            grid.addWidget(cw.btn, i+1, i)
+        
 
 
 #        cw.show()
