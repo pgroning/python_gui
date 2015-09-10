@@ -14,9 +14,6 @@ class mainGUI(QtGui.QMainWindow):
         super(mainGUI, self).__init__()
         self.initUI()
 
-    def chooseFile(self):
-        file_name = QtGui.QFileDialog.getOpenFileName(self, "Open Data File", "/", "Text files (*.txt)") 
-
 
         
     def initUI(self):
@@ -63,13 +60,14 @@ class mainGUI(QtGui.QMainWindow):
         # Add file menu to menubar
         fileMenu = menuBar.addMenu('&File')
 
-        # Create file choice action
-        ofileAction = QAction(QIcon('doc-icon_32x32.png'), 'Open file...', self)
-        ofileAction.setStatusTip('Open file...')
-        ofileAction.triggered.connect(self.chooseFile)
+        # Create file open action
+        openFile = QtGui.QAction(QIcon('doc-icon_32x32.png'), 'Open file...', self)
+        openFile.setShortcut('Ctrl+O')
+        openFile.setStatusTip('Open file...')
+        openFile.triggered.connect(self.fileDialog)
 
         # Add file choice action to file menu
-        fileMenu.addAction(ofileAction)
+        fileMenu.addAction(openFile)
 
         # Create exit action
         exitAction = QAction(QIcon('exit-icon_32x32.png'), 'Exit', self)
@@ -85,13 +83,10 @@ class mainGUI(QtGui.QMainWindow):
         #self.toolbar = self.addToolBar('Exit')
         #self.toolbar.addAction(exitAction)
 
-        cw = self.centralWidget
-        cw = QtGui.QWidget()
+        #cw = self.centralWidget
+        #cw = QtGui.QWidget()
+        cw = QtGui.QFrame()
         self.setCentralWidget(cw)
-
-
-        
-
 
 
         #self.centralWidget = QtGui.QWidget()
@@ -101,23 +96,26 @@ class mainGUI(QtGui.QMainWindow):
         #self.centralWidget.btn = QtGui.QPushButton('Quit!', self.centralWidget)
 
         grid = QtGui.QGridLayout()
-        grid.setSpacing(20)
+        grid.setSpacing(10)
         cw.setLayout(grid)
 
 
         # Add text frames
-        cw.le = QtGui.QLineEdit()
-        grid.addWidget(cw.le, 1, 1, 1, 2)
+        self.lineEdit = QtGui.QLineEdit()
+        grid.addWidget(self.lineEdit, 1, 1, 1, 2)
 
-        cw.te = QtGui.QTextEdit()
-        #grid.addWidget(cw.te, 4, 0, 4, 0)
+        self.textEdit = QtGui.QTextEdit()
+        grid.addWidget(self.textEdit, 5, 0, 2, 3)
+        self.textEditLabel = QtGui.QLabel('<b>Text data enters here:</b>')
+        font = self.textEditLabel.font()
+        font.setPointSize(20)
+        self.textEditLabel.setFont(font)
+        grid.addWidget(self.textEditLabel, 4, 0, 2, 3)
 
-        grid.addWidget(cw.te, 5, 0, 2, 2)
-        
         for i in range(6):
-            cw.btn = QtGui.QPushButton('Quit!', cw)
+            self.btn = QtGui.QPushButton('Quit!', cw)
             #title = QtGui.QLabel('Title')
-            grid.addWidget(cw.btn, i+1, i)
+            grid.addWidget(self.btn, i+1, i)
         
 
         #cw.btn = QtGui.QPushButton('Quit!', cw)
@@ -194,6 +192,15 @@ class mainGUI(QtGui.QMainWindow):
         self.show()
         
 
+    def fileDialog(self):
+
+        fileName = QtGui.QFileDialog.getOpenFileName(self, "Open Data File", "/", "Text files (*.txt)") 
+        if fileName:
+            f = open(fileName, 'r')
+            data = f.read()
+            self.textEdit.setText(data)
+        
+
     def closeEvent(self, event):
         
         reply = QtGui.QMessageBox.question(self, 'Message',
@@ -204,10 +211,6 @@ class mainGUI(QtGui.QMainWindow):
             event.accept()
         else:
             event.ignore()   
-
-
-    #def qwid(self):
-    #    self.centralWidget = QtGui.QWidget()
 
 
         
