@@ -70,6 +70,7 @@ class mainGUI(QtGui.QMainWindow):
         fileMenu.addAction(openFile)
 
         # Create exit action
+        fileMenu.addSeparator()
         exitAction = QAction(QIcon('exit-icon_32x32.png'), 'Exit', self)
         exitAction.setShortcut('Ctrl+Q')
         exitAction.setStatusTip('Exit application')
