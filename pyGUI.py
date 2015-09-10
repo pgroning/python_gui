@@ -89,6 +89,11 @@ class mainGUI(QtGui.QMainWindow):
         cw = QtGui.QWidget()
         self.setCentralWidget(cw)
 
+
+        
+
+
+
         #self.centralWidget = QtGui.QWidget()
         #self.setCentralWidget(self.centralWidget)
 
@@ -96,18 +101,24 @@ class mainGUI(QtGui.QMainWindow):
         #self.centralWidget.btn = QtGui.QPushButton('Quit!', self.centralWidget)
 
         grid = QtGui.QGridLayout()
-        grid.setSpacing(50)
+        grid.setSpacing(20)
         cw.setLayout(grid)
 
+
+        # Add text frames
+        cw.le = QtGui.QLineEdit()
+        grid.addWidget(cw.le, 1, 1, 1, 2)
+
+        cw.te = QtGui.QTextEdit()
+        #grid.addWidget(cw.te, 4, 0, 4, 0)
+
+        grid.addWidget(cw.te, 5, 0, 2, 2)
+        
         for i in range(6):
             cw.btn = QtGui.QPushButton('Quit!', cw)
             #title = QtGui.QLabel('Title')
             grid.addWidget(cw.btn, i+1, i)
         
-
-
-#        cw.show()
-
 
         #cw.btn = QtGui.QPushButton('Quit!', cw)
 
