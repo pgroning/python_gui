@@ -47,7 +47,7 @@ class mainGUI(QtGui.QMainWindow):
         self.move(qr.topLeft())
 
         # Set window title
-        self.setWindowTitle("pyBird")
+        self.setWindowTitle("Bundle Inspector")
 
         # Set window icon
         self.setWindowIcon(QtGui.QIcon('bird-icon_32x32.png'))
