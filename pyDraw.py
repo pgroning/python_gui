@@ -4,10 +4,10 @@
 import sys, random
 from PyQt4 import QtGui, QtCore
 
-class Example(QtGui.QWidget):
+class Bundle(QtGui.QWidget):
     
     def __init__(self):
-        super(Example, self).__init__()
+        super(Bundle, self).__init__()
         
         self.initUI()
         
@@ -211,7 +211,7 @@ class Example(QtGui.QWidget):
 def main():
     
     app = QtGui.QApplication(sys.argv)
-    ex = Example()
+    ex = Bundle()
     sys.exit(app.exec_())
 
 
