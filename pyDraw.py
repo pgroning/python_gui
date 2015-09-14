@@ -65,7 +65,7 @@ class Example(QtGui.QWidget):
     def drawQuad(self, qp):
 
         color = QtGui.QColor(0, 0, 0)
-        color.setNamedColor('#97FFFF')
+        color.setNamedColor('#B0E2FF')
         #qp.setPen(color)
 
         pen = QtGui.QPen(color, 40, QtCore.Qt.SolidLine)
