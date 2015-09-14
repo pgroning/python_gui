@@ -1,16 +1,5 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
 
-"""
-ZetCode PyQt4 tutorial 
-
-In this example we draw 6 lines using
-different pen styles. 
-
-author: Jan Bodnar
-website: zetcode.com 
-last edited: September 2011
-"""
 
 import sys, random
 from PyQt4 import QtGui, QtCore
@@ -31,17 +20,30 @@ class Example(QtGui.QWidget):
     def paintEvent(self, e):
 
         qp = QtGui.QPainter()
+
         qp.begin(self)
         self.setBackground(qp)
-        #qp.setBrush(QtCore.Qt.white)
         self.drawCRD(qp)
         self.drawBox(qp)
-        self.drawQuad(qp)
-        #self.Background(qp)
-        self.drawChannel(qp)
+        qp.end()
+
+        qp.begin(self)
+        self.drawChannels(qp)
+        qp.end()
+
+        qp.begin(self)
+        self.drawDiamond(qp)
+        qp.end()
+
+        qp.begin(self)
+        self.paintCorners(qp)
+        qp.end()
+
+        qp.begin(self)
         self.drawCircles(qp)
         qp.end()
 
+        
     def setBackground(self, qp):
         qp.setBrush(QtCore.Qt.white)
         s = self.size()
@@ -51,13 +53,12 @@ class Example(QtGui.QWidget):
         # Paint crd
         pen = QtGui.QPen(QtCore.Qt.black, 8, QtCore.Qt.SolidLine)
         qp.setPen(pen)
-        qp.drawLine(20, 20, 540, 20)
-        qp.drawLine(20, 20, 20, 540) 
+        s = self.size()
+        qp.drawLine(20, 20, 555, 20)
+        qp.drawLine(20, 20, 20, 555) 
 
     def drawBox(self, qp):
 
-        #qp.setBrush(QtCore.Qt.white)
-        # Paint box
         pen = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
         qp.setPen(pen)
         qp.drawRect(40, 40, 540, 540)
@@ -66,7 +67,6 @@ class Example(QtGui.QWidget):
 
         color = QtGui.QColor(0, 0, 0)
         color.setNamedColor('#B0E2FF')
-        #qp.setPen(color)
 
         pen = QtGui.QPen(color, 40, QtCore.Qt.SolidLine)
         qp.setPen(pen)
@@ -81,56 +81,60 @@ class Example(QtGui.QWidget):
         qp.setPen(pen)
         qp.drawLine(310,310,312,312)
 
-    def drawChannel(self, qp):
-
-        # Paint channel
+    def drawDiamond(self, qp):
         pen = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
         qp.setPen(pen)
 
-        cLength = 140
-        cWidth = 40
+        color = QtGui.QColor(0, 0, 0)
+        color.setNamedColor('#BFEFFF') # light blue
+        qp.setBrush(color)
 
-        c = 310
-        z = 80
-        z1 = 70;
-        #
-        qp.drawLine(40, c-cWidth/2, 300-z1, c-cWidth/2)
-        qp.drawLine(40, c+cWidth/2, 300-z1, c+cWidth/2)
-
-        qp.drawLine(c+z, c-cWidth/2, 600-20, c-cWidth/2)
-        qp.drawLine(c+z, c+cWidth/2, 600-20, c+cWidth/2)
-        #
-        qp.drawLine(c-cWidth/2, 40, c-cWidth/2, c-z)
-        qp.drawLine(c+cWidth/2, 40, c+cWidth/2, c-z)
+        s = self.size()
+        d = 140 # Box size
         
-        qp.drawLine(c-cWidth/2, 600-20, c-cWidth/2, c+z)
-        qp.drawLine(c+cWidth/2, 600-20, c+cWidth/2, c+z)
+        qp.translate(310, 210)
+        qp.rotate(45)
+        qp.drawRect(0,0,d,d)
 
+    def paintCorners(self, qp):
+        color = QtGui.QColor(0, 0, 0)
+        color.setNamedColor('#BFEFFF') # light blue
 
-        qp.drawLine(300-z1, c-cWidth/2, c-cWidth/2, c-z)
-        qp.drawLine(300-z1, c+cWidth/2, c-cWidth/2, c+z)
-        qp.drawLine(c+cWidth/2, c-z, c+z, c-cWidth/2)
-        qp.drawLine(c+z, c+cWidth/2, c+cWidth/2, c+z)
-
-    def Background(self, qp):
-        pen = QtGui.QPen(QtCore.Qt.blue, 1, QtCore.Qt.SolidLine)
-        qp.setPen(pen)
-        qp.setBrush(QtCore.Qt.blue)
-
-        # Background color
         c = 310
-        w = 40
-        qp.drawRect(c-w/2,40,w,540)
-        #qp.rotate(-45)
-
-    def drawCircles(self, qp):
-        # Paint circles
-        pen = QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine)
+        d = 28
+        pen = QtGui.QPen(color, d, QtCore.Qt.SolidLine)
         qp.setPen(pen)
-        #qp.setBrush(QtCore.Qt.green)
+
+        qp.drawPoint(220,c)
+        qp.drawPoint(400,c)
+        qp.drawPoint(c,220)
+        qp.drawPoint(c,400)
+
+
+    def drawChannels(self, qp):
+
+        pen = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
+        qp.setPen(pen)
 
         color = QtGui.QColor(0, 0, 0)
-        #color.setNamedColor('#B0E2FF')
+        color.setNamedColor('#BFEFFF') # light blue
+        qp.setBrush(color)
+
+        s = self.size()
+        d = 30
+        c = 310
+        qp.drawRect(40,c-d/2,540,d)
+        qp.drawRect(c-d/2,40,d,540)
+
+    def drawCircles(self, qp):
+        
+        pen = QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine)
+        qp.setPen(pen)
+
+        r = 40
+
+        color = QtGui.QColor(0, 0, 0)
+
         # Quad 1
         for i in range(5):
             for j in range(5):
@@ -138,7 +142,7 @@ class Example(QtGui.QWidget):
                     continue
                 else:
                     self.setColor(qp)
-                    qp.drawEllipse(45+i*49,45+j*49,42,42)
+                    qp.drawEllipse(45+i*49,45+j*49,r,r)
 
         # Quad 2
         for i in range(5,10):
@@ -147,7 +151,7 @@ class Example(QtGui.QWidget):
                     continue
                 else:
                     self.setColor(qp)
-                    qp.drawEllipse(90+i*49,45+j*49,42,42)
+                    qp.drawEllipse(90+i*49,45+j*49,r,r)
         
         # Quad 3
         for i in range(0,5):
@@ -156,7 +160,7 @@ class Example(QtGui.QWidget):
                     continue
                 else:
                     self.setColor(qp)
-                    qp.drawEllipse(45+i*49,90+j*49,42,42)
+                    qp.drawEllipse(45+i*49,90+j*49,r,r)
         
         # Quad 4
         for i in range(5,10):
@@ -165,7 +169,7 @@ class Example(QtGui.QWidget):
                     continue
                 else:
                     self.setColor(qp)
-                    qp.drawEllipse(90+i*49,90+j*49,42,42)
+                    qp.drawEllipse(90+i*49,90+j*49,r,r)
         
 
     def setColor(self, qp):
@@ -203,21 +207,6 @@ class Example(QtGui.QWidget):
             qp.setBrush(QtCore.Qt.red)
 
 
-
-
-
-
-
-        """
-        if r < 0.25:
-            qp.setBrush(QtCore.Qt.blue)
-        elif r < 0.5:
-            qp.setBrush(QtCore.Qt.yellow)
-        elif r < 0.75:
-            qp.setBrush(QtCore.Qt.green)
-        else:
-            qp.setBrush(QtCore.Qt.red)
-        """
 
 def main():
     
