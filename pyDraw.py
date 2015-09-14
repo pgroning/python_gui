@@ -127,23 +127,17 @@ class Example(QtGui.QWidget):
         # Paint circles
         pen = QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine)
         qp.setPen(pen)
-        qp.setBrush(QtCore.Qt.green)
+        #qp.setBrush(QtCore.Qt.green)
 
+        color = QtGui.QColor(0, 0, 0)
+        #color.setNamedColor('#B0E2FF')
         # Quad 1
         for i in range(5):
             for j in range(5):
                 if (i,j) == (4,4):
                     continue
                 else:
-                    r = random.random()
-                    if r < 0.25:
-                        qp.setBrush(QtCore.Qt.blue)
-                    elif r < 0.5:
-                        qp.setBrush(QtCore.Qt.yellow)
-                    elif r < 0.75:
-                        qp.setBrush(QtCore.Qt.green)
-                    else:
-                        qp.setBrush(QtCore.Qt.red)
+                    self.setColor(qp)
                     qp.drawEllipse(45+i*49,45+j*49,42,42)
 
         # Quad 2
@@ -152,15 +146,7 @@ class Example(QtGui.QWidget):
                 if (i,j) == (5,4):
                     continue
                 else:
-                    r = random.random()
-                    if r < 0.25:
-                        qp.setBrush(QtCore.Qt.blue)
-                    elif r < 0.5:
-                        qp.setBrush(QtCore.Qt.yellow)
-                    elif r < 0.75:
-                        qp.setBrush(QtCore.Qt.green)
-                    else:
-                        qp.setBrush(QtCore.Qt.red)
+                    self.setColor(qp)
                     qp.drawEllipse(90+i*49,45+j*49,42,42)
         
         # Quad 3
@@ -169,15 +155,7 @@ class Example(QtGui.QWidget):
                 if (i,j) == (4,5):
                     continue
                 else:
-                    r = random.random()
-                    if r < 0.25:
-                        qp.setBrush(QtCore.Qt.blue)
-                    elif r < 0.5:
-                        qp.setBrush(QtCore.Qt.yellow)
-                    elif r < 0.75:
-                        qp.setBrush(QtCore.Qt.green)
-                    else:
-                        qp.setBrush(QtCore.Qt.red)
+                    self.setColor(qp)
                     qp.drawEllipse(45+i*49,90+j*49,42,42)
         
         # Quad 4
@@ -186,18 +164,60 @@ class Example(QtGui.QWidget):
                 if (i,j) == (5,5):
                     continue
                 else:
-                    r = random.random()
-                    if r < 0.25:
-                        qp.setBrush(QtCore.Qt.blue)
-                    elif r < 0.5:
-                        qp.setBrush(QtCore.Qt.yellow)
-                    elif r < 0.75:
-                        qp.setBrush(QtCore.Qt.green)
-                    else:
-                        qp.setBrush(QtCore.Qt.red)
+                    self.setColor(qp)
                     qp.drawEllipse(90+i*49,90+j*49,42,42)
         
 
+    def setColor(self, qp):
+        color = QtGui.QColor(0, 0, 0)
+        r = random.random()
+        if r < 0.1:
+            color = QtGui.QColor(255, 0, 255) # purple
+            qp.setBrush(color)
+        elif r < 0.2:
+            color = QtGui.QColor(200, 0, 255) # violet
+                        #color.setNamedColor('#A020F0') # violet
+            qp.setBrush(color)
+                        #qp.setBrush(QtCore.Qt.blue)
+        elif r < 0.3:
+            color = QtGui.QColor(0, 0, 255) # blue
+            qp.setBrush(color)
+                        #qp.setBrush(QtCore.Qt.blue)
+        elif r < 0.4:
+            color = QtGui.QColor(0, 200, 255) # light blue
+                        #color.setNamedColor('#63D1F4') # light blue
+            qp.setBrush(color)
+        elif r < 0.5:
+            color = QtGui.QColor(0, 255, 0) # green
+                        #qp.setBrush(QtCore.Qt.green) # green
+            qp.setBrush(color)
+        elif r < 0.6:
+            qp.setBrush(QtCore.Qt.yellow) # yellow
+        elif r < 0.7:
+            color.setNamedColor('#E9C2A6') # orange
+            qp.setBrush(color)
+        elif r < 0.9:
+            color.setNamedColor('#FF5333') # light red
+            qp.setBrush(color)
+        else:
+            qp.setBrush(QtCore.Qt.red)
+
+
+
+
+
+
+
+        """
+        if r < 0.25:
+            qp.setBrush(QtCore.Qt.blue)
+        elif r < 0.5:
+            qp.setBrush(QtCore.Qt.yellow)
+        elif r < 0.75:
+            qp.setBrush(QtCore.Qt.green)
+        else:
+            qp.setBrush(QtCore.Qt.red)
+        """
 
 def main():
     
