@@ -18,9 +18,20 @@ class Bundle(QtGui.QWidget):
         self.setWindowTitle('Bundle')
         self.show()
 
-        
 
-    def paintEvent(self, e):
+    def mousePressEvent(self, event):
+        
+        button = event.button()
+        #item = self.itemAt(event.x(), event.y())
+
+        if button == 1:
+            print 'SIMPLE LEFT CLICK!'
+            print event.x(), event.y()
+        if button == 2:
+            print 'SIMPLE RIGHT CLICK!'
+
+
+    def paintEvent(self, event):
 
         global s
         s = min(self.size().height(),self.size().width())  

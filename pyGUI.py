@@ -100,7 +100,6 @@ class mainGUI(QtGui.QMainWindow):
         grid.setSpacing(10)
         cw.setLayout(grid)
 
-
         b = Bundle()
         grid.addWidget(b,1,0,10,10)
         
