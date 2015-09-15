@@ -5,7 +5,7 @@ from PyQt4 import QtGui, QtCore
 from PyQt4.QtGui import *
 from PyQt4.QtCore import pyqtSlot
 
-
+from pyDraw import Bundle
 
 #class mainGUI(QtGui.QWidget):
 class mainGUI(QtGui.QMainWindow):
@@ -38,8 +38,8 @@ class mainGUI(QtGui.QMainWindow):
         # Set window size and position
         #self.setGeometry(300, 300, 800, 600)
         self.resize(800,600)
-        self.setMinimumWidth(700)
-        self.setMinimumHeight(500)
+        #self.setMinimumWidth(600)
+        #self.setMinimumHeight(600)
         #self.center()
         qr = self.frameGeometry()
         cp = QtGui.QDesktopWidget().availableGeometry().center()
@@ -101,23 +101,27 @@ class mainGUI(QtGui.QMainWindow):
         cw.setLayout(grid)
 
 
+        b = Bundle()
+        grid.addWidget(b,0,0,2,2)
+        
+        
         # Add text frames
         self.lineEdit = QtGui.QLineEdit()
-        grid.addWidget(self.lineEdit, 1, 1, 1, 2)
-
+        #grid.addWidget(self.lineEdit, 1, 1, 1, 2)
+        
         self.textEdit = QtGui.QTextEdit()
-        grid.addWidget(self.textEdit, 5, 0, 2, 3)
+        #grid.addWidget(self.textEdit, 5, 0, 2, 3)
         self.textEditLabel = QtGui.QLabel('<b>Text data enters here:</b>')
         font = self.textEditLabel.font()
         font.setPointSize(20)
         self.textEditLabel.setFont(font)
-        grid.addWidget(self.textEditLabel, 4, 0, 2, 3)
+        #grid.addWidget(self.textEditLabel, 5, 0, 1, 2)
 
         for i in range(6):
-            self.btn = QtGui.QPushButton('Quit!', cw)
-            #title = QtGui.QLabel('Title')
-            grid.addWidget(self.btn, i+1, i)
-        
+            #self.btn = QtGui.QPushButton('button', cw)
+            title = QtGui.QLabel('Title')
+            #grid.addWidget(self.btn, i+1, i)
+            #grid.addWidget(title,1,1)
 
         #cw.btn = QtGui.QPushButton('Quit!', cw)
 
@@ -220,6 +224,9 @@ def main():
     app = QtGui.QApplication(sys.argv)
     
     w = mainGUI()
+
+    #b = Bundle()
+
     sys.exit(app.exec_())
     
 if __name__ == '__main__':
