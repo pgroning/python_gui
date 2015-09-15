@@ -102,7 +102,7 @@ class mainGUI(QtGui.QMainWindow):
 
 
         b = Bundle()
-        grid.addWidget(b,0,0,2,2)
+        grid.addWidget(b,1,0,10,10)
         
         
         # Add text frames
@@ -111,16 +111,16 @@ class mainGUI(QtGui.QMainWindow):
         
         self.textEdit = QtGui.QTextEdit()
         #grid.addWidget(self.textEdit, 5, 0, 2, 3)
-        self.textEditLabel = QtGui.QLabel('<b>Text data enters here:</b>')
+        self.textEditLabel = QtGui.QLabel('<b>Text string enters here</b>')
         font = self.textEditLabel.font()
-        font.setPointSize(20)
+        font.setPointSize(16)
         self.textEditLabel.setFont(font)
-        #grid.addWidget(self.textEditLabel, 5, 0, 1, 2)
+        grid.addWidget(self.textEditLabel, 0, 5, 1, 1)
 
-        for i in range(6):
-            #self.btn = QtGui.QPushButton('button', cw)
-            title = QtGui.QLabel('Title')
-            #grid.addWidget(self.btn, i+1, i)
+        
+        self.btn = QtGui.QPushButton('button', cw)
+            #title = QtGui.QLabel('Title')
+        grid.addWidget(self.btn, 10, 10)
             #grid.addWidget(title,1,1)
 
         #cw.btn = QtGui.QPushButton('Quit!', cw)
