@@ -14,22 +14,30 @@ class Bundle(QtGui.QWidget):
         
     def initUI(self):      
 
-        self.setGeometry(0, 0, 100, 100)
-        self.setWindowTitle('Bundle')
+        #self.setGeometry(0, 0, 100, 100)
+        #self.setWindowTitle('Bundle')
         self.show()
 
 
-    def mousePressEvent(self, event):
+    def mousePressEvent(self, mouse_evt):
         
-        button = event.button()
+        #super(Bundle, self).mousePressEvent(event)
+
+        button = mouse_evt.button()
         #item = self.itemAt(event.x(), event.y())
 
         if button == 1:
             print 'SIMPLE LEFT CLICK!'
-            print event.x(), event.y()
+            print mouse_evt.x(), mouse_evt.y()
+            self.drawsquare(mouse_evt.x(),mouse_evt.y())
         if button == 2:
             print 'SIMPLE RIGHT CLICK!'
+            print mouse_evt.x(), mouse_evt.y()
 
+
+    def drawsquare(self,x,y):
+        print x,y
+        return x,y
 
     def paintEvent(self, event):
 
@@ -196,7 +204,7 @@ class Bundle(QtGui.QWidget):
         #qp.drawRect(c-d/2,40,d,540)
 
     def drawCircles(self, qp):
-        
+   
         pen = QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine)
         qp.setPen(pen)
         
@@ -251,6 +259,7 @@ class Bundle(QtGui.QWidget):
                     self.setColor(qp)
                     qp.drawEllipse(d+x0+i*x1,d+x0+j*x1,r,r)
         
+
 
     def setColor(self, qp):
         color = QtGui.QColor(0, 0, 0)
