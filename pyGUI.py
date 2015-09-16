@@ -102,7 +102,7 @@ class mainGUI(QtGui.QMainWindow):
 
         b = Bundle()
         grid.addWidget(b,1,0,10,10)
-        
+
         
         # Add text frames
         self.lineEdit = QtGui.QLineEdit()

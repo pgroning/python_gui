@@ -21,7 +21,7 @@ class Bundle(QtGui.QWidget):
 
     def mousePressEvent(self, mouse_evt):
         
-        #super(Bundle, self).mousePressEvent(event)
+        super(Bundle, self).mousePressEvent(mouse_evt)
 
         button = mouse_evt.button()
         #item = self.itemAt(event.x(), event.y())
