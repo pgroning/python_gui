@@ -12,6 +12,8 @@ class Bundle(QtGui.QWidget):
         
         self.initUI()
 
+        self.pinSelect = None
+
         """
     def enterEvent(self, event):
         print "Mouse Entered"
@@ -41,12 +43,12 @@ class Bundle(QtGui.QWidget):
         #item = self.itemAt(event.x(), event.y())
 
         if button == 1:
-            print 'SIMPLE LEFT CLICK!'
+            #print 'SIMPLE LEFT CLICK!'
             #print mouse_evt.x(), mouse_evt.y()
             
             self.click_x = mouse_evt.pos().x()
             self.click_y = mouse_evt.pos().y()
-            print self.click_x, self.click_y
+            #print self.click_x, self.click_y
 
             #self.clickEvent(mouse_evt.x())
 
@@ -56,6 +58,7 @@ class Bundle(QtGui.QWidget):
             #print mouse_evt.x(), mouse_evt.y()
    
         self.update()
+
 
     #def mouseClick(self, qp, x, y):
     #    print x,y
@@ -110,18 +113,55 @@ class Bundle(QtGui.QWidget):
         self.clickMark(qp)
         qp.end()
 
+    def pinPos(self, i, j):
+        dia = s*0.06
+        c = s*0.082
+        a = s*0.07
+        b = s*0.08
+
+        x = a+i*b+dia/2
+        y = a+j*b+dia/2
+        if i >= 5:
+            x = x+c
+        if j >= 5:
+            y = y+c
+        
+        if i < 0:
+            x = -100
+        if j < 0:
+            y = -100
+
+        return x,y
+
     def clickMark(self, qp):
         #color = QtGui.QColor(0, 0, 0)
         pen = QtGui.QPen(QtCore.Qt.red, 2, QtCore.Qt.SolidLine)
         #pen = QtGui.QPen(color, 2, QtCore.Qt.SolidLine)
         qp.setPen(pen)
 
+        dia = s*0.06
+
+        xc = self.click_x
+        yc = self.click_y
+
+        #self.pinSelect = (-1,-1) 
+        for i in range(10):
+            for j in range(10):
+                x,y = self.pinPos(i,j)
+                r2 = (x-xc)**2 + (y-yc)**2
+                if r2 < dia**2/4: # Click is within pin radius
+                    self.pinSelect = (i,j)
+
+        print self.pinSelect
+
         d = s*0.06*1.2
-        x0 = s*0.07
-        x1 = s*0.08
-        
-        qp.drawRect(self.click_x-d/2, self.click_y-d/2, d, d)
-        #qp.drawEllipse(self.click_x-d/2, self.click_y-d/2 ,d ,d)
+
+        if self.pinSelect >= (0,0):
+            if (self.pinSelect != (4,4) and self.pinSelect != (5,4) and
+                self.pinSelect != (4,5) and self.pinSelect != (5,5)):
+                (x,y) = self.pinPos(self.pinSelect[0],self.pinSelect[1])
+                qp.drawRect(x-d/2, y-d/2, d, d)
+
 
     def setBackground(self, qp):
 
