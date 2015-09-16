@@ -14,7 +14,6 @@ class mainGUI(QtGui.QMainWindow):
         super(mainGUI, self).__init__()
         self.initUI()
 
-
         
     def initUI(self):
         
@@ -37,7 +36,7 @@ class mainGUI(QtGui.QMainWindow):
 
         # Set window size and position
         #self.setGeometry(300, 300, 800, 600)
-        self.resize(800,600)
+        self.resize(600,600)
         #self.setMinimumWidth(600)
         #self.setMinimumHeight(600)
         #self.center()
@@ -103,7 +102,8 @@ class mainGUI(QtGui.QMainWindow):
         b = Bundle()
         grid.addWidget(b,1,0,10,10)
 
-        
+        print b.click_x, b.click_y
+
         # Add text frames
         self.lineEdit = QtGui.QLineEdit()
         #grid.addWidget(self.lineEdit, 1, 1, 1, 2)
@@ -193,7 +193,26 @@ class mainGUI(QtGui.QMainWindow):
         #self.le.move(130, 200)
 
         #self.centralWidget.show()
+
         self.show()
+
+    """
+    # Fetch  mouse press events
+    def mousePressEvent(self, mouse_evt):
+        
+        #super(Bundle, self).mousePressEvent(event)
+            
+        button = mouse_evt.button()
+        #item = self.itemAt(mouse_evt.x(), mouse_evt.y())
+        
+        if button == 1:
+            print 'SIMPLE LEFT CLICK!'
+            print mouse_evt.x(), mouse_evt.y()
+            #self.drawsquare(mouse_evt.x(),mouse_evt.y())
+            if button == 2:
+                print 'SIMPLE RIGHT CLICK!'
+                print mouse_evt.x(), mouse_evt.y()
+    """         
         
 
     def fileDialog(self):

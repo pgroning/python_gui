@@ -11,14 +11,28 @@ class Bundle(QtGui.QWidget):
         super(Bundle, self).__init__()
         
         self.initUI()
+
+        """
+    def enterEvent(self, event):
+        print "Mouse Entered"
+        return super(Bundle, self).enterEvent(event)
+
+    def leaveEvent(self, event):
+        print "Mouse Left"
+        return super(Bundle, self).enterEvent(event)
+        """
+
         
     def initUI(self):      
 
-        #self.setGeometry(0, 0, 100, 100)
+        self.setGeometry(0, 0, 100, 100)
         #self.setWindowTitle('Bundle')
         self.show()
 
-
+        # Default values for mouse click
+        self.click_x = -100
+        self.click_y = -100
+    
     def mousePressEvent(self, mouse_evt):
         
         super(Bundle, self).mousePressEvent(mouse_evt)
@@ -28,16 +42,40 @@ class Bundle(QtGui.QWidget):
 
         if button == 1:
             print 'SIMPLE LEFT CLICK!'
-            print mouse_evt.x(), mouse_evt.y()
-            self.drawsquare(mouse_evt.x(),mouse_evt.y())
-        if button == 2:
-            print 'SIMPLE RIGHT CLICK!'
-            print mouse_evt.x(), mouse_evt.y()
+            #print mouse_evt.x(), mouse_evt.y()
+            
+            self.click_x = mouse_evt.pos().x()
+            self.click_y = mouse_evt.pos().y()
+            print self.click_x, self.click_y
+
+            #self.clickEvent(mouse_evt.x())
+
+            #self.clickHilight(mouse_evt.x(),mouse_evt.y())
+        #if button == 2:
+        #    print 'SIMPLE RIGHT CLICK!'
+            #print mouse_evt.x(), mouse_evt.y()
+   
+        self.update()
+
+    #def mouseClick(self, qp, x, y):
+    #    print x,y
 
 
-    def drawsquare(self,x,y):
+#    def clickEvent(self, x):
+#        return x
+
+    """
+    def clickHilight(self,x,y,qp):
         print x,y
-        return x,y
+        
+        pen = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
+        qp.setPen(pen)
+        
+        r = s*0.06
+        
+        qp.drawEllipse(x,y,r,r)
+    """
+    
 
     def paintEvent(self, event):
 
@@ -68,16 +106,31 @@ class Bundle(QtGui.QWidget):
         self.drawCircles(qp)
         qp.end()
 
+        qp.begin(self)
+        self.clickMark(qp)
+        qp.end()
+
+    def clickMark(self, qp):
+        #color = QtGui.QColor(0, 0, 0)
+        pen = QtGui.QPen(QtCore.Qt.red, 2, QtCore.Qt.SolidLine)
+        #pen = QtGui.QPen(color, 2, QtCore.Qt.SolidLine)
+        qp.setPen(pen)
+
+        d = s*0.06*1.2
+        x0 = s*0.07
+        x1 = s*0.08
         
+        qp.drawRect(self.click_x-d/2, self.click_y-d/2, d, d)
+        #qp.drawEllipse(self.click_x-d/2, self.click_y-d/2 ,d ,d)
+
     def setBackground(self, qp):
 
         qp.setBrush(QtCore.Qt.white)
-        x1 = s*0.999
+        #x1 = s*0.999
 
-        #s = self.size()
-        #x1 = s.height()*0.999
-        #x2 = s.height()*0.999
-        qp.drawRect(0,0,x1,x1)
+        x1 = self.size().width()*0.999
+        x2 = self.size().height()*0.999
+        qp.drawRect(0,0,x1,x2)
         #qp.drawRect(0,0,600,600)
 
     def drawCRD(self, qp):
