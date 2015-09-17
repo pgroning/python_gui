@@ -14,8 +14,8 @@ class Bundle(QtGui.QWidget):
 
         # Declare attributes
         self.pinSelect = None
-        self.click_x = -100
-        self.click_y = -100
+        self.click_x = 0
+        self.click_y = 0
         self.dim = 0
 
         """
