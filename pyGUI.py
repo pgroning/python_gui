@@ -46,7 +46,8 @@ class mainGUI(QtGui.QMainWindow):
         self.move(qr.topLeft())
 
         # Set window title
-        self.setWindowTitle("Bundle Inspector")
+        self.setWindowTitle("Bundle Laboratory")
+        #self.setWindowTitle("Bundle Inspector")
 
         # Set window icon
         self.setWindowIcon(QtGui.QIcon('bird-icon_32x32.png'))
