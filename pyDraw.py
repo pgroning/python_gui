@@ -12,7 +12,11 @@ class Bundle(QtGui.QWidget):
         
         self.initUI()
 
+        # Declare attributes
         self.pinSelect = None
+        self.click_x = -100
+        self.click_y = -100
+        self.dim = 0
 
         """
     def enterEvent(self, event):
@@ -32,8 +36,8 @@ class Bundle(QtGui.QWidget):
         self.show()
 
         # Default values for mouse click
-        self.click_x = -100
-        self.click_y = -100
+        #self.click_x = -100
+        #self.click_y = -100
     
     def mousePressEvent(self, mouse_evt):
         
@@ -82,8 +86,10 @@ class Bundle(QtGui.QWidget):
 
     def paintEvent(self, event):
 
-        global s
-        s = min(self.size().height(),self.size().width())  
+        self.dim = min(self.size().height(),self.size().width())
+        s = self.dim
+        #global s
+        #s = min(self.size().height(),self.size().width())  
         
         qp = QtGui.QPainter()
 
@@ -114,6 +120,7 @@ class Bundle(QtGui.QWidget):
         qp.end()
 
     def pinPos(self, i, j):
+        s = self.dim
         dia = s*0.06
         c = s*0.082
         a = s*0.07
@@ -134,6 +141,7 @@ class Bundle(QtGui.QWidget):
         return x,y
 
     def clickMark(self, qp):
+        s = self.dim
         #color = QtGui.QColor(0, 0, 0)
         pen = QtGui.QPen(QtCore.Qt.red, 2, QtCore.Qt.SolidLine)
         #pen = QtGui.QPen(color, 2, QtCore.Qt.SolidLine)
@@ -174,6 +182,7 @@ class Bundle(QtGui.QWidget):
         #qp.drawRect(0,0,600,600)
 
     def drawCRD(self, qp):
+        s = self.dim
         # Paint crd
         pen = QtGui.QPen(QtCore.Qt.black, 8, QtCore.Qt.SolidLine)
         qp.setPen(pen)
@@ -189,7 +198,7 @@ class Bundle(QtGui.QWidget):
         #qp.drawLine(20, 20, 20, 555) 
 
     def drawBox(self, qp):
-
+        s = self.dim
         pen = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
         qp.setPen(pen)
         x1 = s*0.05
@@ -220,6 +229,7 @@ class Bundle(QtGui.QWidget):
         qp.drawLine(310,310,312,312)
 
     def drawDiamond(self, qp):
+        s = self.dim
         pen = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
         qp.setPen(pen)
 
@@ -241,6 +251,7 @@ class Bundle(QtGui.QWidget):
         qp.drawRect(0,0,d,d)
 
     def paintCorners(self, qp):
+        s = self.dim
         color = QtGui.QColor(0, 0, 0)
         color.setNamedColor('#BFEFFF') # light blue
 
@@ -266,7 +277,7 @@ class Bundle(QtGui.QWidget):
 
 
     def drawChannels(self, qp):
-
+        s = self.dim
         pen = QtGui.QPen(QtCore.Qt.black, 2, QtCore.Qt.SolidLine)
         qp.setPen(pen)
 
@@ -297,7 +308,7 @@ class Bundle(QtGui.QWidget):
         #qp.drawRect(c-d/2,40,d,540)
 
     def drawCircles(self, qp):
-   
+        s = self.dim
         pen = QtGui.QPen(QtCore.Qt.black, 1, QtCore.Qt.SolidLine)
         qp.setPen(pen)
         
